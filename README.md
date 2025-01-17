@@ -1,4 +1,4 @@
-# Project: Shared ORM Library app
+# Project: Shared ORM Library 
 
 ## Overview
 This project demonstrates using TypeORM with MySQL to manage database schema and run migrations efficiently. It includes setup for defining entities, generating migrations, and applying them to the database.
@@ -29,10 +29,6 @@ This project demonstrates using TypeORM with MySQL to manage database schema and
 3. **Update environment variables**:
    Configure your database connection details in `src/data-source.ts`:
    ```typescript
-   import { DataSource } from 'typeorm';
-   import { Product } from './entities/Product';
-   import { Category } from './entities/Category';
-   import path from 'path';
 
    const AppDataSource = new DataSource({
      type: 'mysql',
@@ -47,7 +43,6 @@ This project demonstrates using TypeORM with MySQL to manage database schema and
      logging: true,
    });
 
-   export default AppDataSource;
    ```
 
 4. **Compile TypeScript**:
