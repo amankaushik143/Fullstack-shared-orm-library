@@ -1,101 +1,97 @@
 # Project: Shared ORM Library 
 
-## Overview
-This project demonstrates using TypeORM with MySQL to manage database schema and run migrations efficiently. It includes setup for defining entities, generating migrations, and applying them to the database.
+This is a shared ORM library built using TypeORM and TypeScript. It provides a modular approach for managing entities, database migrations, and data access logic.
+
+
+## Features
+
+- Shared ORM setup for managing multiple entities and migrations.
+- TypeORM-based database interactions.
+- Modular and reusable design.
+- Environment configuration for flexible deployment.
 
 ---
 
 ## Prerequisites
 
-1. **Node.js**: Ensure you have Node.js installed (v14+ recommended).
-2. **MySQL**: Set up a MySQL server and create a database (e.g., `MyStore`).
-3. **TypeScript**: Ensure TypeScript is installed globally or locally in the project.
+Ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v14+)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [PostgreSQL](https://www.postgresql.org/) or another supported database
+- [Git](https://git-scm.com/)
 
 ---
 
-## Project Setup
+## Installation
 
-1. **Clone the repository**:
+1. **Clone the Repository:**
    ```bash
    git clone <repository-url>
    cd shared-orm-library
    ```
 
-2. **Install dependencies**:
+2. **Install Dependencies:**
+   Using npm:
    ```bash
    npm install
    ```
-
-3. **Update environment variables**:
-   Configure your database connection details in `src/data-source.ts`:
-   ```typescript
-
-   const AppDataSource = new DataSource({
-     type: 'mysql',
-     host: 'localhost',
-     port: 3306,
-     username: 'your_username',
-     password: 'your_password',
-     database: 'MyStore',
-     entities: [Product, Category],
-     migrations: [path.join(__dirname, './migrations/*.ts')],
-     synchronize: false,
-     logging: true,
-   });
-
+   Or using yarn:
+   ```bash
+   yarn install
    ```
 
-4. **Compile TypeScript**:
-   Compile your TypeScript files to JavaScript:
-   ```bash
-   tsc
+3. **Set Up Environment Variables:**
+   Create a `.env` file in the root directory and configure it as follows:
+   ```env
+   NODE_ENV=development
+   DB_HOST=localhost
+   DB_PORT=3306
+   DB_USERNAME=your_db_user
+   DB_PASSWORD=your_db_password
+   DB_NAME=your_db_name
    ```
 
 ---
 
-## Scripts in `package.json`
+## Configuration
 
-Add the following scripts to `package.json` to simplify migration and database tasks:
-```json
-"scripts": {
-  "typeorm": "npx typeorm-ts-node-commonjs --dataSource src/data-source.ts",
-  "typeorm:generate": "npm run typeorm migration:generate src/migrations/Migration --timestamp",
-  "typeorm:run": "npm run typeorm migration:run",
-  "typeorm:revert": "npm run typeorm migration:revert",
-  "start": "ts-node src/index.ts"
-}
-```
+- **Database Configuration:** Update the `src/data-source.ts` file to match your database credentials.
+- **TypeORM Configuration:** Ensure your `.env` file has all required variables.
 
 ---
 
-## Generating and Running Migrations
+## Running the Application
 
-1. **Generate a new migration**:
+1. **Development Mode:**
+   Start the library in development mode with `ts-node-dev`:
    ```bash
-   npm run typeorm:generate
+   npm run dev
    ```
 
-2. **Apply migrations to the database**:
+2. **Production Mode:**
+   Build the library and run the application:
    ```bash
-   npm run typeorm:run
-   ```
-
-3. **Revert the last migration (if needed)**:
-   ```bash
-   npm run typeorm:revert
-   ```
-
-4. **List pending migrations**:
-   ```bash
-   npx ts-node ./node_modules/typeorm/cli.js migration:show -d src/data-source.ts
+   npm run build
+   npm start
    ```
 
 ---
 
+## Database Migrations
 
-## Additional Notes
-- Ensure MySQL server is running before applying migrations.
-- Always verify the `migrations` table for applied migration records.
+1. **Generate a Migration:**
+   ```bash
+   npm run migration:generate 
+   ```
 
+2. **Run Migrations:**
+   ```bash
+   npm run migration:run
+   ```
 
+3. **Revert Migrations:**
+   ```bash
+   npm run migration:revert
+   ```
 
