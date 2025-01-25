@@ -1,19 +1,21 @@
 {
   "name": "shared-orm-library",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-  "typeorm": "npx typeorm-ts-node-commonjs --dataSource src/data-source.ts",
-  "typeorm:generate": "npm run typeorm migration:generate src/migrations/Migration --timestamp",
-  "typeorm:run": "npm run typeorm migration:run",
-  "typeorm:revert": "npm run typeorm migration:revert",
-  "start": "ts-node src/index.ts"
-},
+    "typeorm": "npx typeorm-ts-node-commonjs --dataSource src/data-source.ts",
+    "typeorm:generate": "npm run typeorm migration:generate src/migrations/Migration --timestamp",
+    "typeorm:run": "npm run typeorm migration:run",
+    "typeorm:revert": "npm run typeorm migration:revert",
+    "start": "ts-node src/index.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "dotenv": "^16.4.7",
     "mysql2": "^3.12.0",
     "pg": "^8.13.1",
     "reflect-metadata": "^0.2.2",

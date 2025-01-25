@@ -1,19 +1,20 @@
+import 'dotenv/config';
 import { DataSource } from 'typeorm';
-import { Product } from './entities/Product';
-import { Category } from './entities/Category';
-import path from 'path';
+import { Product } from './entities/product';
+import { Category } from './entities/category';
+
 
 const AppDataSource = new DataSource({
   type: 'mysql',
-  host: 'localhost',
-  port: 3306,
-  username: 'root', // Replace with your MySQL username
-  password: '', // Replace with your MySQL password
-  database: 'MyStore', // Replace with your database name
+  host: process.env.DB_HOST || 'localhost',
+  port: parseInt(process.env.DB_PORT || '3306', 10),
+  username: process.env.DB_USERNAME || 'root',
+  password: process.env.DB_PASSWORD || '',
+  database: process.env.DB_NAME || 'mystore',
   entities: [Product, Category],
-  migrations: [path.join(__dirname, './migrations/*.ts')], // Adjust if needed
+  migrations: ['./src/migrations/*.ts'],
   synchronize: false,
   logging: true,
 });
 
-export default AppDataSource; // Ensure ONLY this is exported
+export default AppDataSource;

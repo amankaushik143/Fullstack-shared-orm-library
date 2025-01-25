@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
-import { Product } from '../entities/Product';
-import { Category } from '../entities/Category';
+import { Product } from '../entities/product';
+import { Category } from '../entities/category';
 import path from 'path';
 
 const AppDataSource = new DataSource({
@@ -9,7 +9,7 @@ const AppDataSource = new DataSource({
   port: 3306,
   username: 'root',
   password: '',
-  database: 'MyStore',
+  database: 'mystore',
   entities: [Product, Category],
   migrations: [path.join(__dirname, '../migrations/*.ts')],
   synchronize: false,

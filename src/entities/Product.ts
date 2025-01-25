@@ -1,29 +1,37 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { Category } from './Category';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Category } from './category';
 
-@Entity('products')
+@Entity()
 export class Product {
   @PrimaryGeneratedColumn()
-  id!: number; // Add definite assignment assertion
+  id: number;
 
   @Column()
-  productName!: string;
+  productName: string;
 
   @Column()
-  description!: string;
+  description: string;
 
   @Column('decimal')
-  price!: number;
+  price: number;
 
   @Column()
-  stockQuantity!: number;
+  stockQuantity: number;
+
+  @Column()
+  categoryId: number;
 
   @ManyToOne(() => Category, (category) => category.products)
-  category!: Category;
+  @JoinColumn({ name: 'categoryId' })
+  category: Category;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt!: Date;
-
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
-  updatedAt!: Date;
+  constructor() {
+    this.id = 0;
+    this.productName = '';
+    this.description = '';
+    this.price = 0;
+    this.stockQuantity = 0;
+    this.categoryId = 0;
+    this.category = new Category();
+  }
 }

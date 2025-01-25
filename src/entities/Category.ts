@@ -1,7 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Product } from './Product';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Product } from './product';
 
-@Entity('categories')
+@Entity()
 export class Category {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -16,11 +16,5 @@ export class Category {
   isActive!: boolean;
 
   @OneToMany(() => Product, (product) => product.category)
-  products!: Product[];
-
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt!: Date;
-
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
-  updatedAt!: Date;
+  products!: Product[]; // ✅ No initialization
 }
